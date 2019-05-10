@@ -1,9 +1,4 @@
-package load.assist;
-/*
- *@auther suger
- *2019
- *14:07
- */
+package load.tools;
 
 public class randomString {
     private static int getRandom(int count) {
