@@ -4,7 +4,7 @@ import load.bean.Goods;
 
 import java.util.List;
 
-public interface goodsService {
+public interface GoodsService {
     /**
      * 新增货品信息
      * @param goods

@@ -1,16 +1,18 @@
-package load.service;
+package load.service.serviceIml;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import load.bean.Goods;
 import load.bean.GoodsExample;
 import load.mapper.GoodsMapper;
+import load.service.GoodsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.List;
 
 @Service
-public class goodsServiceImpl implements goodsService{
+public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     private GoodsMapper goodsMapper;
@@ -37,20 +39,14 @@ public class goodsServiceImpl implements goodsService{
     }
 
 
-
     public List<Goods> getGoods(String content) {
         GoodsExample goodsExample =new GoodsExample();
-        GoodsExample.Criteria criteria=goodsExample.createCriteria();
-        if(content.equals("$home")){
-                criteria.andDateLessThan(new Date());
-                return goodsMapper.selectByExample(goodsExample);
-        }else {
-            goodsExample.or().andNameLike("%"+content+"%");
+        if(!StringUtils.isEmpty(content)){
             goodsExample.or().andNameLike("%"+content+"%");
             goodsExample.or().andTypeLike("%"+content+"%");
             goodsExample.or().andDetailLike("%"+content+"%");
             goodsExample.or().andVersionLike("%"+content+"%");
-            return goodsMapper.selectByExample(goodsExample);
         }
+        return goodsMapper.selectByExample(goodsExample);
     }
 }

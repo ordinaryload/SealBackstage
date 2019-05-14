@@ -3,7 +3,7 @@
                  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
                  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-    <context  id="mysqlTables"   targetRuntime="MyBatis3">
+    <context  id="mysqlTables"   targetRuntime="MyBatis3" defaultModelType="flat">
         <jdbcConnection  driverClass="com.mysql.cj.jdbc.Driver"
                          connectionURL="jdbc:mysql://localhost:3306/seals?serverTimezone=UTC&amp;useSSL=false"  userId="root"  password="password" />
 
@@ -42,27 +42,27 @@
         <table  tableName="user"   domainObjectName="User">
             <generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>
         </table>
-        <table  tableName="communicate"   domainObjectName="Communicate">
-            <generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>
-        </table>
+        <!--<table  tableName="communicate"   domainObjectName="Communicate">-->
+            <!--<generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>-->
+        <!--</table>-->
         <table  tableName="goods"   domainObjectName="Goods">
             <generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>
         </table>
-        <table  tableName="message"   domainObjectName="Message">
-            <generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>
-        </table>
-        <table  tableName="order"   domainObjectName="Order">
-            <generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>
-        </table>
-        <table  tableName="reply"   domainObjectName="Reply">
-            <generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>
-        </table>
-        <table  tableName="settings"   domainObjectName="Settings">
-            <generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>
-        </table>
-        <table  tableName="shopping"   domainObjectName="Shopping">
-            <generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>
-        </table>
+        <!--<table  tableName="message"   domainObjectName="Message">-->
+            <!--<generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>-->
+        <!--</table>-->
+        <!--<table  tableName="orders"   domainObjectName="Orders">-->
+            <!--<generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>-->
+        <!--</table>-->
+        <!--<table  tableName="replys"   domainObjectName="Reply">-->
+            <!--<generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>-->
+        <!--</table>-->
+        <!--<table  tableName="settings"   domainObjectName="Settings">-->
+            <!--<generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>-->
+        <!--</table>-->
+        <!--<table  tableName="shopping"   domainObjectName="Shopping">-->
+            <!--<generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>-->
+        <!--</table>-->
 
     </context>
 

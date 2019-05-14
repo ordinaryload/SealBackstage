@@ -2,15 +2,16 @@ package load.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import load.tools.getNowDate;
+import load.bean.Goods;
+import load.bean.User;
+import load.constant.SealConstants;
+import load.tools.GetNowDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import load.bean.Goods;
-import load.bean.User;
-import load.service.goodsService;
+import load.service.GoodsService;
 import load.tools.randomString;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,13 +22,10 @@ import java.util.List;
 
 @Controller
 @RequestMapping("goods")
-public class goodsController {
-    //状态码
-    private final String SUCCESS = "1";
-    private final String fail = "0";
+public class GoodsController {
 
     @Autowired
-    private goodsService goodsService;
+    private GoodsService goodsService;
 
     /**
      * 发布新的商品
@@ -41,11 +39,10 @@ public class goodsController {
         JSONObject jsonObject=new JSONObject();
         User user = (User) session.getAttribute("tUser");
         goods.setUsername(user.getUsername());
-
-        System.out.println(goods);
         goodsService.addGoods(goods);
         session.removeAttribute("images");
-        return SUCCESS;
+        jsonObject.put("state", SealConstants.SUCCESS);
+        return jsonObject.toJSONString();
     }
 
 
@@ -59,7 +56,8 @@ public class goodsController {
     public String getGoodsList(HttpSession session){
         User user= (User) session.getAttribute("tUser");
         if (user==null)
-            return fail;
+            return SealConstants.fail;
+
         List<Goods> goods = goodsService.selectGoods(user.getUsername());
         JSONArray jsonArray=new JSONArray();
         for (Goods key:goods
@@ -70,7 +68,7 @@ public class goodsController {
             jsonObject.put("images",key.getImages());
             jsonObject.put("name",key.getName());
             jsonObject.put("sold",key.getSold()==null?0:key.getSold());
-            jsonObject.put("type",key.getType());
+            jsonObject.put("types",key.getType());
             jsonObject.put("version",key.getVersion());
             jsonArray.add(jsonObject);
         }
@@ -78,16 +76,17 @@ public class goodsController {
 
     }
 
+    /**
+     * 获取商品列表
+     * @param content
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "goods",method = RequestMethod.GET,produces = "application/json;charset=utf-8")
-    public String getGoodsList(@RequestParam("mode") String mode, @RequestParam("content") String content){
+    public String getGoodsList(@RequestParam("content") String content){
         //mode (home/search)
         List<Goods> goods=null;
-        if(mode.equals("home")){
-            goods = goodsService.getGoods("$home");
-        }else {
-            goods=goodsService.getGoods(content);
-        }
+        goods=goodsService.getGoods(content);
         JSONArray jsonArray=new JSONArray();
         if(goods!=null)
         for (Goods key:goods
@@ -98,7 +97,7 @@ public class goodsController {
             jsonObject.put("images",key.getImages());
             jsonObject.put("name",key.getName());
             jsonObject.put("sold",key.getSold()==null?0:key.getSold());
-            jsonObject.put("type",key.getType());
+            jsonObject.put("types",key.getType());
             jsonObject.put("version",key.getVersion());
             jsonArray.add(jsonObject);
         }
@@ -114,7 +113,7 @@ public class goodsController {
     @ResponseBody
     public String saveimgUrls(HttpServletRequest request){
         //获取项目根目录
-        String rootPath = System.getProperty("crossborder");
+        String rootPath = System.getProperty("seal");
         //获取文件流
         MultipartHttpServletRequest req = (MultipartHttpServletRequest) request;
         MultipartFile multipartFile = req.getFile("file");
@@ -132,7 +131,7 @@ public class goodsController {
                 dir.mkdirs();
             }
             //生成随机文件名
-            String filename = randomString.getRandomString(20) + getNowDate.Date();
+            String filename = randomString.getRandomString(20) + GetNowDate.Date();
             filename+=contentType;
 
             File file = new File(realPath, filename);
@@ -145,7 +144,7 @@ public class goodsController {
         } catch (IllegalStateException e) {
             e.printStackTrace();
         }
-        return fail;
+        return SealConstants.fail;
     }
 
 }

@@ -3,7 +3,7 @@ package load.tools;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class getNowDate {
+public class GetNowDate {
    public static String Date(){
        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
        String nowTime=df.format(new Date());

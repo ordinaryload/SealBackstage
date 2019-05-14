@@ -1,15 +1,16 @@
-package load.service;
+package load.service.serviceIml;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import load.bean.User;
 import load.bean.UserExample;
 import load.mapper.UserMapper;
+import load.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class userServiceImpl implements userService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;

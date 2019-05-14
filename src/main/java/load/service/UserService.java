@@ -2,7 +2,7 @@ package load.service;
 
 import load.bean.User;
 
-public interface userService {
+public interface UserService {
     /**
      * 用户登录
      * @param email      邮箱
@@ -21,7 +21,8 @@ public interface userService {
     /**
      * 查询用户是否存在
      * @param email
-     * @return
+     * @return boolean
      */
      boolean isUserExist(String email);
+
 }
