@@ -39,24 +39,24 @@
                            identity="false"/>
         </table>
 
-        <table  tableName="user"   domainObjectName="User">
-            <generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>
-        </table>
+        <!--<table  tableName="user"   domainObjectName="User">-->
+            <!--<generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>-->
+        <!--</table>-->
         <!--<table  tableName="communicate"   domainObjectName="Communicate">-->
             <!--<generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>-->
         <!--</table>-->
-        <table  tableName="goods"   domainObjectName="Goods">
-            <generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>
-        </table>
+        <!--<table  tableName="goods"   domainObjectName="Goods">-->
+            <!--<generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>-->
+        <!--</table>-->
         <!--<table  tableName="message"   domainObjectName="Message">-->
             <!--<generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>-->
         <!--</table>-->
         <!--<table  tableName="orders"   domainObjectName="Orders">-->
             <!--<generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>-->
         <!--</table>-->
-        <!--<table  tableName="replys"   domainObjectName="Reply">-->
-            <!--<generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>-->
-        <!--</table>-->
+        <table  tableName="replys"   domainObjectName="Reply">
+            <generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>
+        </table>
         <!--<table  tableName="settings"   domainObjectName="Settings">-->
             <!--<generatedKey  column="id"  sqlStatement="JDBC"   identity="false"/>-->
         <!--</table>-->
