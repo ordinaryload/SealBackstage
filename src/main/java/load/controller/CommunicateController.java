@@ -7,6 +7,7 @@ import load.bean.User;
 import load.bean.po.CommunicateVo;
 import load.constant.SealConstants;
 import load.entity.param.CommunicateParam;
+import load.entity.po.CommunicatePo;
 import load.service.CommunicateService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,6 +97,21 @@ public class CommunicateController {
         returnMap.put("state",SealConstants.SUCCESS);
         List<CommunicateVo> list=(List<CommunicateVo>)load.tools.BeanUtils.copyProperties(communicate,CommunicateVo.class);
         returnMap.put("data",list);
+        return objectMapper.writeValueAsString(returnMap);
+    }
+
+    /**
+     * 查看论坛信息
+     * @param communicateParam
+     * @return
+     */
+    @RequestMapping(value = "communicateAndReply",method = RequestMethod.GET)
+    @ResponseBody
+    public String getCommunicateAndReply(CommunicateParam communicateParam) throws Exception{
+        List<CommunicatePo> communicate = communicateService.getCommunicateAndReply(communicateParam);
+        Map<String,Object> returnMap=new HashMap<>();
+        returnMap.put("state",SealConstants.SUCCESS);
+        returnMap.put("data",communicate);
         return objectMapper.writeValueAsString(returnMap);
     }
 }

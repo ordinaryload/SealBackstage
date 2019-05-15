@@ -2,8 +2,11 @@ package load.service.serviceIml;
 
 import load.bean.Communicate;
 import load.bean.CommunicateExample;
+import load.bean.po.CommunicateVo;
 import load.entity.param.CommunicateParam;
+import load.entity.po.CommunicatePo;
 import load.mapper.CommunicateMapper;
+import load.mapper.mr.MrCommunicateMapper;
 import load.service.CommunicateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +18,7 @@ import java.util.List;
 public class CommunicateServiceImpl implements CommunicateService {
 
     @Autowired
-    private CommunicateMapper communicateMapper;
+    private MrCommunicateMapper communicateMapper;
 
     @Override
     public void insertCommunicate(Communicate communicate) {
@@ -78,5 +81,11 @@ public class CommunicateServiceImpl implements CommunicateService {
         if(!StringUtils.isEmpty(communicateParam.getUsername())){
             criteria.andUsernameEqualTo(communicateParam.getUsername());
         }
+    }
+
+
+    @Override
+    public List<CommunicatePo> getCommunicateAndReply(CommunicateParam communicateParam) {
+        return communicateMapper.getCommunicateAndReply(communicateParam);
     }
 }
