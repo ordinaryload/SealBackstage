@@ -1,20 +1,23 @@
-package load.bean;
+package load.bean.po;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
-public class Message {
-
+public class ReplyVo {
     private Integer id;
 
-    private String putrole;
+    private Integer msgid;
 
-    private String getrole;
+    private String type;
 
     private String text;
 
     private String images;
-
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
+
+    private String rea;
 
     public Integer getId() {
         return id;
@@ -24,20 +27,20 @@ public class Message {
         this.id = id;
     }
 
-    public String getPutrole() {
-        return putrole;
+    public Integer getMsgid() {
+        return msgid;
     }
 
-    public void setPutrole(String putrole) {
-        this.putrole = putrole == null ? null : putrole.trim();
+    public void setMsgid(Integer msgid) {
+        this.msgid = msgid;
     }
 
-    public String getGetrole() {
-        return getrole;
+    public String getType() {
+        return type;
     }
 
-    public void setGetrole(String getrole) {
-        this.getrole = getrole == null ? null : getrole.trim();
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
     }
 
     public String getText() {
@@ -62,5 +65,13 @@ public class Message {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getRea() {
+        return rea;
+    }
+
+    public void setRea(String rea) {
+        this.rea = rea == null ? null : rea.trim();
     }
 }

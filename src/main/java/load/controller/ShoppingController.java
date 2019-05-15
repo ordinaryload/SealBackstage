@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import load.bean.Shopping;
 import load.bean.User;
+import load.bean.po.ReplyVo;
+import load.bean.po.ShoppingVo;
 import load.constant.SealConstants;
 import load.entity.param.ShoppingParam;
 import load.service.ShoppingService;
@@ -91,7 +93,8 @@ public class ShoppingController {
         List<Shopping> shopping = shoppingService.getOrders(shoppingParam);
         Map<String,Object> returnMap=new HashMap<>();
         returnMap.put("state",SealConstants.SUCCESS);
-        returnMap.put("data",shopping);
+        List<ShoppingVo> list=(List<ShoppingVo>)load.tools.BeanUtils.copyProperties(shopping,ShoppingVo.class);
+        returnMap.put("data",list);
         return objectMapper.writeValueAsString(returnMap);
     }
 

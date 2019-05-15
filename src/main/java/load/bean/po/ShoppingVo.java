@@ -1,9 +1,10 @@
-package load.bean;
+package load.bean.po;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
-public class Orders {
-
+public class ShoppingVo {
     private Integer id;
 
     private Integer goodsid;
@@ -11,10 +12,8 @@ public class Orders {
     private String buyer;
 
     private Integer counts;
-
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
-
-    private Integer status;
 
     public Integer getId() {
         return id;
@@ -54,13 +53,5 @@ public class Orders {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
     }
 }

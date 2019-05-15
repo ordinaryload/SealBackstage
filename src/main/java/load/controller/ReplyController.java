@@ -3,6 +3,8 @@ package load.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import load.bean.Reply;
+import load.bean.po.OrdersVo;
+import load.bean.po.ReplyVo;
 import load.constant.SealConstants;
 import load.entity.param.ReplyParam;
 import load.service.ReplyService;
@@ -79,10 +81,11 @@ public class ReplyController {
     @RequestMapping(value = "reply",method = RequestMethod.GET)
     @ResponseBody
     public String getReply(ReplyParam replyParam) throws Exception{
-        List<Reply> reply = replyService.getReply(replyParam);
+        List<Reply> replies = replyService.getReply(replyParam);
         Map<String,Object> returnMap=new HashMap<>();
         returnMap.put("state",SealConstants.SUCCESS);
-        returnMap.put("data",reply);
+        List<ReplyVo> list=(List<ReplyVo>)load.tools.BeanUtils.copyProperties(replies,ReplyVo.class);
+        returnMap.put("data",list);
         return objectMapper.writeValueAsString(returnMap);
     }
 

@@ -20,25 +20,25 @@ public class GoodsServiceImpl implements GoodsService {
     public boolean addGoods(Goods goods) {
         Date date=new Date();
         goods.setDate(date);
-        if(goodsMapper.insert(goods)>0){
+        if(goodsMapper.insertSelective(goods)>0){
             return true;
         }
         return false;
     }
 
-
-    public List<Goods> selectGoods(String username) {
+    @Override
+    public List<Goods> selectGoods(Goods goods) {
         GoodsExample goodsExample =new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        if (username!=null){
-            criteria.andUsernameEqualTo(username);
+        if (!StringUtils.isEmpty(goods.getUsername())){
+            criteria.andUsernameEqualTo(goods.getUsername());
         }else {
             criteria.andDateLessThan(new Date());
         }
         return goodsMapper.selectByExample(goodsExample);
     }
 
-
+    @Override
     public List<Goods> getGoods(String content) {
         GoodsExample goodsExample =new GoodsExample();
         if(!StringUtils.isEmpty(content)){

@@ -1,9 +1,10 @@
-package load.bean;
+package load.bean.po;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
-public class Message {
-
+public class MessageVo {
     private Integer id;
 
     private String putrole;
@@ -13,7 +14,7 @@ public class Message {
     private String text;
 
     private String images;
-
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
     public Integer getId() {

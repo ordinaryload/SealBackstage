@@ -18,7 +18,7 @@ public class ReplyParam {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
-    private String read;
+    private String rea;
 
     public Integer getId() {
         return id;
@@ -68,11 +68,11 @@ public class ReplyParam {
         this.date = date;
     }
 
-    public String getRead() {
-        return read;
+    public String getRea() {
+        return rea;
     }
 
-    public void setRead(String read) {
-        this.read = read;
+    public void setRea(String rea) {
+        this.rea = rea;
     }
 }

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import load.bean.Message;
 import load.bean.User;
+import load.bean.po.MessageVo;
 import load.constant.SealConstants;
 import load.entity.param.MessageParam;
 import load.service.MessageService;
@@ -91,7 +92,9 @@ public class MessageController {
         List<Message> message = messageService.getMessage(messageParam);
         Map<String,Object> returnMap=new HashMap<>();
         returnMap.put("state",SealConstants.SUCCESS);
-        returnMap.put("data",message);
+        List<MessageVo> list=(List<MessageVo>)load.tools.BeanUtils.copyProperties(message,MessageVo.class);
+
+        returnMap.put("data",list);
         return objectMapper.writeValueAsString(returnMap);
     }
 

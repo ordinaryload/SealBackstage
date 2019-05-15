@@ -68,17 +68,17 @@ public class ReplyServiceImpl implements ReplyService {
         if(!StringUtils.isEmpty(replyParam.getImages())){
             criteria.andImagesEqualTo(replyParam.getImages());
         }
-        if(!StringUtils.isEmpty(replyParam.getMsgid())){
-            criteria.andMsgidEqualTo(replyParam.getMsgid());
-        }
-        if(!StringUtils.isEmpty(replyParam.getRead())){
-            criteria.andReaEqualTo(replyParam.getRead());
-        }
         if(!StringUtils.isEmpty(replyParam.getText())){
             criteria.andTextEqualTo(replyParam.getText());
         }
         if(!StringUtils.isEmpty(replyParam.getType())){
             criteria.andTypeEqualTo(replyParam.getType());
+        }
+        if(!StringUtils.isEmpty(replyParam.getMsgid())){
+            criteria.andMsgidEqualTo(replyParam.getMsgid());
+        }
+        if(!StringUtils.isEmpty(replyParam.getRea())){
+            criteria.andReaEqualTo(replyParam.getRea());
         }
     }
 }

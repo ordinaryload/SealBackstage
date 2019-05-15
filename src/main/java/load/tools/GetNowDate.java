@@ -10,17 +10,4 @@ public class GetNowDate {
        System.out.println(nowTime);// new Date()为获取当前系统时间
        return nowTime;
    }
-    public static String Time(){
-        SimpleDateFormat df = new SimpleDateFormat("HH-mm-ss");//设置日期格式
-        String nowTime=df.format(new Date());
-        System.out.println(nowTime);// new Date()为获取当前系统时间
-        return nowTime;
-    }
-
-    public static String Complete(){
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");//设置日期格式
-        String nowTime=df.format(new Date());
-        System.out.println(nowTime);// new Date()为获取当前系统时间
-        return nowTime;
-    }
 }

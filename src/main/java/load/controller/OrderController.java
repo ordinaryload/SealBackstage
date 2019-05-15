@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import load.bean.Orders;
 import load.bean.User;
+import load.bean.po.OrdersVo;
 import load.constant.SealConstants;
 import load.entity.param.OrderParam;
 import load.service.OrderService;
@@ -78,7 +79,8 @@ public class OrderController {
        List<Orders> orders= orderService.getOrders(orderParam);
        Map<String,Object> returnMap=new HashMap<>();
        returnMap.put("state",SealConstants.SUCCESS);
-       returnMap.put("data",orders);
+       List<OrdersVo> list=(List<OrdersVo>)load.tools.BeanUtils.copyProperties(orders,OrdersVo.class);
+       returnMap.put("data",list);
        return objectMapper.writeValueAsString(returnMap);
     }
 }

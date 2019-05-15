@@ -2,8 +2,12 @@ package load.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import load.bean.Goods;
+import load.bean.Reply;
 import load.bean.User;
+import load.bean.po.GoodsVo;
+import load.bean.po.ReplyVo;
 import load.constant.SealConstants;
 import load.tools.GetNowDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("goods")
@@ -26,6 +32,9 @@ public class GoodsController {
 
     @Autowired
     private GoodsService goodsService;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     /**
      * 发布新的商品
@@ -53,26 +62,16 @@ public class GoodsController {
      */
     @ResponseBody
     @RequestMapping(value = "good" ,method = RequestMethod.GET,produces = "application/json;charset=utf-8")
-    public String getGoodsList(HttpSession session){
+    public String getGoodsList(HttpSession session,Goods goods) throws Exception{
         User user= (User) session.getAttribute("tUser");
         if (user==null)
             return SealConstants.fail;
-
-        List<Goods> goods = goodsService.selectGoods(user.getUsername());
-        JSONArray jsonArray=new JSONArray();
-        for (Goods key:goods
-             ) {
-            JSONObject jsonObject=new JSONObject();
-            jsonObject.put("id",key.getId());
-            jsonObject.put("price",key.getPrice());
-            jsonObject.put("images",key.getImages());
-            jsonObject.put("name",key.getName());
-            jsonObject.put("sold",key.getSold()==null?0:key.getSold());
-            jsonObject.put("types",key.getType());
-            jsonObject.put("version",key.getVersion());
-            jsonArray.add(jsonObject);
-        }
-        return jsonArray.toJSONString();
+        List<Goods> goods1 = goodsService.selectGoods(goods);
+        Map<String,Object> returnMap=new HashMap<>();
+        returnMap.put("state",SealConstants.SUCCESS);
+        List<GoodsVo> list=(List<GoodsVo>)load.tools.BeanUtils.copyProperties(goods1,GoodsVo.class);
+        returnMap.put("data",list);
+        return objectMapper.writeValueAsString(returnMap);
 
     }
 

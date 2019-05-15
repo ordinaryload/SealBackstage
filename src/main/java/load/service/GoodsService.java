@@ -17,7 +17,7 @@ public interface GoodsService {
      * @param username
      * @return
      */
-     List<Goods> selectGoods(String username);
+     List<Goods> selectGoods(Goods username);
 
     /**
      * 首页获取商品列表
