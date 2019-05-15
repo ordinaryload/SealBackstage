@@ -18,9 +18,8 @@ public class GoodsServiceImpl implements GoodsService {
     private GoodsMapper goodsMapper;
 
     public boolean addGoods(Goods goods) {
-        Date date=new Date();
-        goods.setDate(date);
-        if(goodsMapper.insertSelective(goods)>0){
+        goods.setDate(new Date());
+        if(goodsMapper.insert(goods) > 0){
             return true;
         }
         return false;
@@ -30,9 +29,13 @@ public class GoodsServiceImpl implements GoodsService {
     public List<Goods> selectGoods(Goods goods) {
         GoodsExample goodsExample =new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
+        if (!StringUtils.isEmpty(goods.getId())) {
+            criteria.andIdEqualTo(goods.getId());
+        }
         if (!StringUtils.isEmpty(goods.getUsername())){
             criteria.andUsernameEqualTo(goods.getUsername());
-        }else {
+        }
+        else {
             criteria.andDateLessThan(new Date());
         }
         return goodsMapper.selectByExample(goodsExample);

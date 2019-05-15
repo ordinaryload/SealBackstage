@@ -4,10 +4,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import load.bean.Goods;
-import load.bean.Reply;
 import load.bean.User;
 import load.bean.po.GoodsVo;
-import load.bean.po.ReplyVo;
 import load.constant.SealConstants;
 import load.tools.GetNowDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import load.service.GoodsService;
 import load.tools.randomString;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -82,10 +79,9 @@ public class GoodsController {
      */
     @ResponseBody
     @RequestMapping(value = "goods",method = RequestMethod.GET,produces = "application/json;charset=utf-8")
-    public String getGoodsList(@RequestParam("content") String content){
+    public String getGoodsList(@RequestParam(value="content",required = false) String content){
         //mode (home/search)
-        List<Goods> goods=null;
-        goods=goodsService.getGoods(content);
+        List<Goods> goods = goodsService.getGoods(content);
         JSONArray jsonArray=new JSONArray();
         if(goods!=null)
         for (Goods key:goods
