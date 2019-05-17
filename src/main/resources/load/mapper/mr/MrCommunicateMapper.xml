@@ -14,7 +14,7 @@
     <result column="images" jdbcType="VARCHAR" property="images" />
     <result column="date" jdbcType="TIMESTAMP" property="date" />
 
-    <collection property="replyList" ofType="load.entity.po.ReplyPo" select="selectReply" column="id"></collection>
+    <collection property="replyList" ofType="load.entity.po.ReplyPo" select="selectReply" column="{id=id,type=tempType}"></collection>
   </resultMap>
 
 
@@ -27,12 +27,12 @@
     <result column="date" jdbcType="TIMESTAMP" property="date" />
     <result column="rea" jdbcType="VARCHAR" property="rea" />
     <result column="username" jdbcType="VARCHAR" property="username" />
-    <collection property="childReplyPo" ofType="load.entity.po.ReplyPo" select="selectReply" column="id"></collection>
+    <collection property="childReplyPo" ofType="load.entity.po.ReplyPo" select="selectReply" column="{id=id,type=tempType}"></collection>
 
   </resultMap>
 
   <select id="getCommunicateAndReply" resultMap="BaseResultMap" >
-    select     id, username, type, text, images, date
+    select     id, username, type, text, images, date ,1 tempType
     from communicate
     <if test="id!=null and id !=''">
       id=#{id}
@@ -42,10 +42,10 @@
 
   <select id="selectReply" resultMap="myReplyResultMap">
 
-    select id, msgid, type, text, images, date, rea, username
+    select id, msgid, type, text, images, date, rea, username,2 tempType
     from  replys
     where msgid=#{id}
-    and type=2
+    and type=#{type}
   </select>
 
 </mapper>

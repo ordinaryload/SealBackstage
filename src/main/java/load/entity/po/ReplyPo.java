@@ -15,7 +15,9 @@ public class ReplyPo {
     private String text;
 
     private String images;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
+
     private String username;
 
     private String rea;

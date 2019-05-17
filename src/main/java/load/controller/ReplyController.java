@@ -3,10 +3,12 @@ package load.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import load.bean.Reply;
+import load.bean.User;
 import load.bean.po.OrdersVo;
 import load.bean.po.ReplyVo;
 import load.constant.SealConstants;
 import load.entity.param.ReplyParam;
+import load.entity.po.ReplyPo;
 import load.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,8 +39,15 @@ public class ReplyController {
      */
     @RequestMapping(value = "reply",method = RequestMethod.PUT)
     @ResponseBody
-    public String addReply(@RequestBody Reply reply){
+    public String addReply(@RequestBody Reply reply, HttpSession httpSession ){
+        User user =(User) httpSession.getAttribute("tUser");
         JSONObject jsonObject = new JSONObject();
+        if(user==null){
+            jsonObject.put("state", SealConstants.fail);
+            jsonObject.put("message","用户未登录");
+            return jsonObject.toJSONString();
+        }
+        reply.setUsername(user.getUsername());
         replyService.insertReply(reply);
         jsonObject.put("state", SealConstants.SUCCESS);
         return jsonObject.toJSONString();
@@ -84,7 +94,7 @@ public class ReplyController {
         List<Reply> replies = replyService.getReply(replyParam);
         Map<String,Object> returnMap=new HashMap<>();
         returnMap.put("state",SealConstants.SUCCESS);
-        List<ReplyVo> list=(List<ReplyVo>)load.tools.BeanUtils.copyProperties(replies,ReplyVo.class);
+        List<ReplyPo> list=(List<ReplyPo>)load.tools.BeanUtils.copyProperties(replies,ReplyPo.class);
         returnMap.put("data",list);
         return objectMapper.writeValueAsString(returnMap);
     }

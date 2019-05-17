@@ -14,7 +14,7 @@ public class MessageVo {
     private String text;
 
     private String images;
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date date;
 
     public Integer getId() {

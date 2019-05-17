@@ -16,6 +16,7 @@ public interface CommunicateService {
     int updateByCondition(Communicate communicate);
 
     List<Communicate> getCommunicate(CommunicateParam communicateParam);
+
     List<CommunicatePo> getCommunicateAndReply(CommunicateParam communicateParam);
 
 }

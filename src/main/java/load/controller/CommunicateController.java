@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import load.bean.Communicate;
 import load.bean.User;
 import load.bean.po.CommunicateVo;
+import load.bean.po.MessageVo;
 import load.constant.SealConstants;
 import load.entity.param.CommunicateParam;
 import load.entity.po.CommunicatePo;
@@ -111,7 +112,8 @@ public class CommunicateController {
         List<CommunicatePo> communicate = communicateService.getCommunicateAndReply(communicateParam);
         Map<String,Object> returnMap=new HashMap<>();
         returnMap.put("state",SealConstants.SUCCESS);
-        returnMap.put("data",communicate);
+        List<CommunicatePo> list=(List<CommunicatePo>)load.tools.BeanUtils.copyProperties(communicate,CommunicatePo.class);
+        returnMap.put("data",list);
         return objectMapper.writeValueAsString(returnMap);
     }
 }

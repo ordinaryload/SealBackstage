@@ -86,6 +86,10 @@ public class CommunicateServiceImpl implements CommunicateService {
 
     @Override
     public List<CommunicatePo> getCommunicateAndReply(CommunicateParam communicateParam) {
-        return communicateMapper.getCommunicateAndReply(communicateParam);
+        CommunicateExample communicateExample = new CommunicateExample();
+        CommunicateExample.Criteria criteria = communicateExample.createCriteria();
+        wrapCondition(criteria,communicateParam);
+        List<CommunicatePo> communicates = communicateMapper.getCommunicateAndReply(communicateParam);
+        return communicates;
     }
 }

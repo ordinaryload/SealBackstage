@@ -92,7 +92,7 @@ public class GoodsController {
             jsonObject.put("images",key.getImages());
             jsonObject.put("name",key.getName());
             jsonObject.put("sold",key.getSold()==null?0:key.getSold());
-            jsonObject.put("types",key.getType());
+            jsonObject.put("type",key.getType());
             jsonObject.put("version",key.getVersion());
             jsonArray.add(jsonObject);
         }

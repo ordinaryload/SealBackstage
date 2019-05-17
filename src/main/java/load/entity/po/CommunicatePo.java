@@ -1,6 +1,7 @@
 package load.entity.po;
 
-import load.bean.Reply;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -15,7 +16,7 @@ public class CommunicatePo {
     private String text;
 
     private String images;
-
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
     List<ReplyPo> replyList;
